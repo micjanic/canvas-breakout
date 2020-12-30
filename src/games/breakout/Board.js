@@ -1,4 +1,6 @@
 import React, { useRef, useEffect } from 'react'
+import { BallMovement } from './BallMovement'
+import { data } from '../../data'
 
 let x = 0
 
@@ -9,12 +11,11 @@ export default function Board() {
         const render = () => {
             const canvas = canvasRef.current
             const ctx = canvas.getContext('2d')
+            let { ballObj, brickObj } = data
+
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.beginPath()
-            ctx.arc(x, 75, 50, 0, 2 * Math.PI)
-            ctx.stroke()
+            BallMovement(ctx, ballObj)
             requestAnimationFrame(render)
-            x++
         }
         render()
     }, [])
